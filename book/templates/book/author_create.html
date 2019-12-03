@@ -1,0 +1,14 @@
+<p><a href="{% url 'book:base' %}">Página Início</a></p> 
+
+<h1>Cadastrar Autor</h1>
+<div>
+        <form id="create-form-author"
+              action=""
+              method="post">
+          {% csrf_token %}
+          {{ form }}
+        <br/>
+        <br/>
+          <input type='submit' name='upload' value='Salvar'/>
+        </form>
+</div>

@@ -1,0 +1,13 @@
+<p><a href="{% url 'book:base' %}">Página Início</a></p>  
+<h1>Cadastrar Gênero</h1>
+    <div>
+      <form id="create-form-genre"
+            action=""
+            method="post">
+        {% csrf_token %}
+        {{ form }}
+      <br/>
+      <br/>
+        <input type='submit' name='upload' value='Salvar'/>
+      </form>
+    </div>

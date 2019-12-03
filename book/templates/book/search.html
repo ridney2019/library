@@ -1,0 +1,37 @@
+<p><a href="{% url 'book:base' %}">Página Início</a></p>    
+    <h1>Pesquisar</h1>
+    <form method='GET' action="{% url 'book:search_results' %}">
+        <input type='text' name='q'>
+        <input class="button" type='submit' value="{{request.GET.q}}" placeholder="Buscar">
+    </form>
+
+    <form class="form-inline" action="" method="GET">
+            
+            <button class="btn" type="submit">Search</button>
+            </fieldset>
+        </form>
+        {% for book in object_list %} 
+        {{ form }}
+<table border="1">
+        <thead>
+        
+        <tr>
+            <th>Titulo</th>
+            <th>Autores</th>
+            <th>Gêneros</th>
+            <th>Ano</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.year_published }}</td>
+        </tr>
+        </tbody>
+     </table>
+{% empty %}
+    <li>No books yet.</li>
+{% endfor %}

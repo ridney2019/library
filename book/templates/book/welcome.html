@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h7><p>O que voce deseja Fazer ?</p></h7>
+        <div>
+                <ul>
+                        <li><a href="{% url 'book:author_create' %}">Cadastrar Autor</a></li>
+                        <li><a href="{% url 'book:author_update' %}">Atulizar Autor</a></li>
+                        <li><a href="{% url 'book:book_view' %}">Cadastrar Livro</a></li>
+                        <li><a href="{% url 'book:book_update' %}">Atulizar Livro</a></li>
+                        <li><a href="{% url 'book:genre_create' %}">Cadastrar Gênero Lirerario</a></li>
+                        <li><a href="{% url 'book:genre_update' %}">Atulizar Gênero</a></li>
+                        <li><a href="{% url 'book:search_results' %}">Buscar</a></li>
+                </ul>
+        </div>
+{% endblock content %}
