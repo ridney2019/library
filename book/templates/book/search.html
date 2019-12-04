@@ -1,15 +1,10 @@
 <p><a href="{% url 'book:base' %}">Página Início</a></p>    
     <h1>Pesquisar</h1>
-    <form method='GET' action="{% url 'book:search_results' %}">
-        <input type='text' name='q'>
-        <input class="button" type='submit' value="{{request.GET.q}}" placeholder="Buscar">
-    </form>
 
-    <form class="form-inline" action="" method="GET">
-            
-            <button class="btn" type="submit">Search</button>
-            </fieldset>
-        </form>
+    <form method='GET' action="{% url 'book:search_results' %}">
+        <input type='search' name='q' placeholder="Buscar">
+        <input class="btn" type='submit' value="{{request.GET.q}}" >
+    </form>
         {% for book in object_list %} 
         {{ form }}
 <table border="1">

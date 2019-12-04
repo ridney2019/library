@@ -18,15 +18,17 @@ class AuthorView(CreateView):
     template_name = 'book/author_create.html'
     success_url = reverse_lazy("book:author_create")
 
-    def Autores(self):
-        return Author.objects.all()
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['author_list'] = self.model.objects.all()
+        return context
 
 
 class AuthorUpdateView(UpdateView):
     model = Author
     template_name = 'book/author_create.html'
     success_url = ("book:author_update")
-    fields = '__all__'
+    form_class = AuthorForm
 
 
 class BookView(CreateView):
@@ -35,8 +37,10 @@ class BookView(CreateView):
     template_name = 'book/book_create.html'
     success_url = reverse_lazy("book:book_view")
 
-    def Livros(self):
-        return Book.objects.all()
+def get_context_data(self):
+    context = super().get_context_data()
+    context['book_list'] = self.model.objects.all()
+    return context
 
 
 class BookUpdateView(UpdateView):
@@ -52,13 +56,15 @@ class GenreView(CreateView):
     template_name = 'book/genre_create.html'
     success_url = reverse_lazy("book:genre_create")
 
-    def Generos(self):
-        return Genre.objects.all()
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['genre_list'] = self.model.objects.all()
+        return context
 
 class GenreUpdateView(UpdateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'my-book-edit.html'
+    template_name = 'book/genre_create.html'
     success_url = ("book:genre_update")
 
 
@@ -66,14 +72,14 @@ class SearchResultsView(ListView):
     model = Book
     template_name = 'book/search.html'
     success_url = ("book:search_view")
-    paginate_by = 30 
     form_class = SearchForm
-
+    
 def get_queryset(self):
-        query = self.request.GET.get('q')
-
-        results = Book.objects.filter
-        (
-            Q(title__icontains=query) | Q(author__icontains=query)
-        )
-        return results
+        queryset = super().get_queryset()
+        to_query = self.request.GET.get('q', None) or self.request.POST.get('q', None)
+        q = Q()
+        if to_query:
+            q = Q(title__icontains=to_query) | Q(author__icontains=to_query) | Q(year_published__icontains=to_query) | Q(genre__icontains=to_query)
+            queryset = queryset.filter(q)
+         
+        return queryset
